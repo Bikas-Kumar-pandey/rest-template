@@ -8,5 +8,6 @@ public class StudentDto {
     private String name;
     private String country;
     private String subject;
+    private String designation;
 
 }
