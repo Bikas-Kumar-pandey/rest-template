@@ -4,10 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restTemplate.Entity.StudentRest;
+import com.restTemplate.dto.Foo;
 import com.restTemplate.dto.StudentDto;
 
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,10 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class RestControler {
@@ -33,6 +40,23 @@ public class RestControler {
 
         return forObject;
     }
+
+//    @RequestMapping("/demos/{id}")
+//    public StudentDto Values(@PathVariable("id") String id) {
+//        StringBuilder builder = new StringBuilder("http://localhost:8080/Byid/" + id);
+//        URI uri = URI.create(builder.toString());
+//        Foo forObject = restTemplate.getForObject(uri, Foo.class);
+//
+//        List<StudentDto> list =new ArrayList<>();
+//        StudentDto dto = new StudentDto();
+//        for(StudentRest val:forObject.getList()){
+//
+//            dto.setCountry(val.getCountry());
+//            dto.setName(val.getName());
+//            list.add(dto);
+//}
+//        return forObject;
+//    }
 
 
 
@@ -60,11 +84,24 @@ public class RestControler {
 
     }
 
+//@GetMapping("/exchange")
+//    public void useOfExchange(){
+//        String fooResourceUrl = "http://localhost:8080/Byid/1";
+//        RestTemplate restTemplate = new RestTemplate();
+//    HttpEntity<Foo> request = new HttpEntity<>(new Foo("bar"));
+//    URI location = restTemplate.postForLocation(fooResourceUrl, request);
+//    Assertions.assertNotNull(location);
+//
+//    }
 
 
-
-
-
+    @GetMapping("/deleteWithRest/{id}")
+public String delete(@PathVariable int id){
+        StringBuilder builder = new StringBuilder("http://localhost:8080/delete/"+id );
+        URI uri = URI.create(builder.toString());
+restTemplate.delete(uri);
+return "deleted with rest";
+}
 
 
 
